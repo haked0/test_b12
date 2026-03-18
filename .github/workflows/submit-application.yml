@@ -1,0 +1,28 @@
+name: Submit Application
+
+on:
+  workflow_dispatch:
+
+jobs:
+  submit:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Submit application
+        env:
+          APPLICANT_NAME: "Myrza Nurmanbetov"
+          APPLICANT_EMAIL: "hakedhacked0@gmail.com"
+          RESUME_LINK: "https://filebin.net/n5m9p6nwv3zbqwu2"
+          B12_SIGNING_SECRET: ${{ secrets.B12_SIGNING_SECRET }}
+        run: python submit_application.py
